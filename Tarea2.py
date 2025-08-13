@@ -1,4 +1,5 @@
 import random
+import time  # <-- Agrega esta línea
 
 # Datos preestablecidos para pruebas rápidas
 usar_datos_prueba = True  # Cambia a True para usar datos de prueba
@@ -48,16 +49,22 @@ else:
         # Agregamos el diccionario a la lista de solicitudes
         solicitudes.append(ciudadano)
 
-# Ordenamos las solicitudes por tiempo estimado
-#solicitudes.sort(key=lambda x: x['tiempo_estimado'])
+# Medir el tiempo de ordenamiento
+inicio = time.time()
+
 # Ordenamos las solicitudes por tiempo estimado con el metodo burbuja
 for i in range(len(solicitudes) - 1):
     for j in range(len(solicitudes) - 1 - i):
         if solicitudes[j]['tiempo_estimado'] > solicitudes[j + 1]['tiempo_estimado']:
             solicitudes[j], solicitudes[j + 1] = solicitudes[j + 1], solicitudes[j]
 
+fin = time.time()
+tiempo_ordenamiento = fin - inicio
+
 # Mostramos la lista de solicitudes ordenadas
 print("\nLista de Solicitudes Ordenadas:")
 for ciudadano in solicitudes:
     print(f"Ciudadano {ciudadano['id']}: {ciudadano['nombre']} - {ciudadano['tiempo_estimado']} minutos")
+
+print(f"\nTiempo de ordenamiento: {tiempo_ordenamiento} segundos.")
 
